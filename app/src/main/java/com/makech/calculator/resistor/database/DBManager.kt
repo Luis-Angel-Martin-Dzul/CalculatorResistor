@@ -62,8 +62,8 @@ class DBManager(context : Context) : SQLiteOpenHelper(context, "calculator_resis
         db.execSQL("INSERT INTO BandTolerance(Id, FkColor, Value) VALUES (3, 6, 0.25);")
         db.execSQL("INSERT INTO BandTolerance(Id, FkColor, Value) VALUES (4, 7, 0.1);")
         db.execSQL("INSERT INTO BandTolerance(Id, FkColor, Value) VALUES (5, 8, 0.05)")
-        db.execSQL("INSERT INTO BandTolerance(Id, FkColor, Value) VALUES (7, 10, 5);")
-        db.execSQL("INSERT INTO BandTolerance(Id, FkColor, Value) VALUES (8, 11, 10);")
+        db.execSQL("INSERT INTO BandTolerance(Id, FkColor, Value) VALUES (6, 10, 5);")
+        db.execSQL("INSERT INTO BandTolerance(Id, FkColor, Value) VALUES (7, 11, 10);")
 
         db.execSQL("INSERT INTO BandPPM(Id, FkColor, Value) VALUES (1, 1, 100);")
         db.execSQL("INSERT INTO BandPPM(Id, FkColor, Value) VALUES (2, 2, 50);")

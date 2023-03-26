@@ -2,15 +2,20 @@ package com.makech.calculator.resistor.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import com.makech.calculator.resistor.R;
 import com.makech.calculator.resistor.adapter.NBandAdapter;
+import com.makech.calculator.resistor.fragment.Band4Fragment;
+import com.makech.calculator.resistor.fragment.Band5Fragment;
+import com.makech.calculator.resistor.fragment.Band6Fragment;
 import com.makech.calculator.resistor.models.NBand;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,15 +25,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Llenar lista
-        ArrayList<NBand> bandList = new ArrayList<NBand>();
-        bandList.add(new NBand(1, "4 Banda"));
-        bandList.add(new NBand(2, "5 Banda"));
-        bandList.add(new NBand(3, "6 Banda"));
-
+        NBand nBand = new NBand();
+        NBandAdapter custemAdapter = new NBandAdapter(this, R.layout.item_band, nBand.getArrayNBand());
 
         Spinner spinner = findViewById(R.id.spinner_band);
-        NBandAdapter custemAdapter = new NBandAdapter(this, R.layout.item_nband, bandList);
         spinner.setAdapter(custemAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                // Se llama cuando el usuario selecciona un elemento del Spinner
+                NBand selectedNBand = (NBand) parent.getItemAtPosition(pos);
+                CallOtherFragment(selectedNBand.getId());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Se llama cuando no se ha seleccionado ningún elemento en el Spinner
+            }
+        });
 
     }
+
+    private void CallOtherFragment(int band){
+        Fragment fragment = new Fragment();
+
+        switch (band){
+            case 1:
+                fragment = Band4Fragment.newInstance();
+                break;
+            case 2:
+                fragment = Band5Fragment.newInstance();
+                break;
+            case 3:
+                fragment = Band6Fragment.newInstance();
+                break;
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_bandN, fragment);
+        fragmentTransaction.commit();
+
+    }
+
 }

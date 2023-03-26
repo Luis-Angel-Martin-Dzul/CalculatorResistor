@@ -1,6 +1,7 @@
 package com.makech.calculator.resistor.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,15 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.makech.calculator.resistor.R;
-import com.makech.calculator.resistor.models.NBand;
+import com.makech.calculator.resistor.models.BandOfColor;
 
 import java.util.List;
 
-public class NBandAdapter extends ArrayAdapter<NBand> {
+public class BandOfColorAdapter extends ArrayAdapter<BandOfColor> {
 
     LayoutInflater inflater;
 
-    public NBandAdapter(@NonNull Context context, int resource, @NonNull List<NBand> list) {
+    public BandOfColorAdapter(@NonNull Context context, int resource, @NonNull List<BandOfColor> list){
         super(context, resource, list);
         inflater = LayoutInflater.from(context);
     }
@@ -27,25 +28,33 @@ public class NBandAdapter extends ArrayAdapter<NBand> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        NBand numband = getItem(position);
+        BandOfColor bandOfColor = getItem(position);
 
         View rowView = inflater.inflate(R.layout.item_band, null, true);
-        TextView name = rowView.findViewById(R.id.item_band_text);
-        name.setText(numband.getName());
+
+        TextView option = rowView.findViewById(R.id.item_band_text);
+
+        if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
+        option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
+        option.setText(bandOfColor.getName());
 
         return rowView;
+
     }
 
     @Override
     public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        NBand numband = getItem(position);
+        BandOfColor bandOfColor = getItem(position);
 
         if(convertView == null)
             convertView = inflater.inflate(R.layout.item_band, parent, false);
 
-        TextView name = convertView.findViewById(R.id.item_band_text);
-        name.setText(numband.getName());
+        TextView option = convertView.findViewById(R.id.item_band_text);
+
+        if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
+        option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
+        option.setText(bandOfColor.getName());
 
         return convertView;
     }

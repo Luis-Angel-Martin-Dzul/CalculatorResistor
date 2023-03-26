@@ -7,4 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="bandBlack"> #000000</color>
+    <color name="bandBrown"> #8B4513</color>
+    <color name="bandRed"> #FF5733</color>
+    <color name="bandOrange"> #FFA500</color>
+    <color name="bandYellow"> #FFFF66</color>
+    <color name="bandGreen"> #006400</color>
+    <color name="bandBlue"> #1E90FF</color>
+    <color name="bandViolet"> #9400D3</color>
+    <color name="bandGrey"> #808080</color>
+    <color name="bandWhite"> #FFFFFF</color>
+    <color name="bandGold"> #FFD700</color>
+    <color name="bandSilver"> #C0C0C0</color>
 </resources>
