@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:padding="5dp"
-        android:src="@drawable/proximamente"/>
+        android:src="@drawable/resistances"/>
 
     <TextView
         android:id="@+id/resistance_value"

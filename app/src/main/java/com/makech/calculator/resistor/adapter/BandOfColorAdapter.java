@@ -36,7 +36,7 @@ public class BandOfColorAdapter extends ArrayAdapter<BandOfColor> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandOfColor.getName());
+        option.setText(String.valueOf(bandOfColor.getId()));
 
         return rowView;
 
@@ -54,7 +54,7 @@ public class BandOfColorAdapter extends ArrayAdapter<BandOfColor> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandOfColor.getName());
+        option.setText(String.valueOf(bandOfColor.getId()));
 
         return convertView;
     }

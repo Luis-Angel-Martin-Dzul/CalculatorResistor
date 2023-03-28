@@ -13,7 +13,6 @@ public class BandOfColor {
         Name = name;
         Color = color;
     }
-
     public int getId() { return Id; }
     public String getName() { return Name; }
 

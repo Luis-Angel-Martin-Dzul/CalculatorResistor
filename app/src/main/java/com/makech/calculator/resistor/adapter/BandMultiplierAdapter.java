@@ -13,16 +13,19 @@ import android.widget.TextView;
 import com.makech.calculator.resistor.R;
 import com.makech.calculator.resistor.models.BandMultiplier;
 import com.makech.calculator.resistor.models.BandOfColor;
+import com.makech.calculator.resistor.util.Util;
 
 import java.util.List;
 
 public class BandMultiplierAdapter extends ArrayAdapter<BandMultiplier> {
 
     LayoutInflater inflater;
+    private Util util;
 
     public BandMultiplierAdapter(@NonNull Context context, int resource, @NonNull List<BandMultiplier> listMultiplier){
         super(context, resource, listMultiplier);
         inflater = LayoutInflater.from(context);
+        util = new Util();
     }
 
     @NonNull
@@ -38,7 +41,7 @@ public class BandMultiplierAdapter extends ArrayAdapter<BandMultiplier> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandOfColor.getName());
+        option.setText(util.simplifyMultiplier(bandMultiplier.getOMS()));
 
         return rowView;
 
@@ -57,7 +60,7 @@ public class BandMultiplierAdapter extends ArrayAdapter<BandMultiplier> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandOfColor.getName());
+        option.setText(util.simplifyMultiplier(bandMultiplier.getOMS()));
 
         return convertView;
     }

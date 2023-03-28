@@ -39,7 +39,7 @@ public class BandPPMAdapter extends ArrayAdapter<BandPPM> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandOfColor.getName());
+        option.setText(bandPPM.getValue() + "ppm");
 
         return rowView;
     }
@@ -57,7 +57,7 @@ public class BandPPMAdapter extends ArrayAdapter<BandPPM> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandOfColor.getName());
+        option.setText(bandPPM.getValue() + "ppm");
 
         return convertView;
     }

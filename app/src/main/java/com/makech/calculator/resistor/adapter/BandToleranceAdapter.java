@@ -20,6 +20,7 @@ import java.util.List;
 public class BandToleranceAdapter extends ArrayAdapter<BandTolerance> {
 
     LayoutInflater inflater;
+    String s = "±";
 
     public BandToleranceAdapter(@NonNull Context context, int resource, @NonNull List<BandTolerance> listTolerance){
         super(context, resource, listTolerance);
@@ -39,7 +40,7 @@ public class BandToleranceAdapter extends ArrayAdapter<BandTolerance> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandOfColor.getName());
+        option.setText(bandTolerance.getValue() + "±");
 
         return rowView;
 
@@ -58,7 +59,7 @@ public class BandToleranceAdapter extends ArrayAdapter<BandTolerance> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandOfColor.getName());
+        option.setText(bandTolerance.getValue() + "±");
 
         return convertView;
     }

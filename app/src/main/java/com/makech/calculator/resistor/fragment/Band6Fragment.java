@@ -20,12 +20,14 @@ import com.makech.calculator.resistor.models.BandMultiplier;
 import com.makech.calculator.resistor.models.BandOfColor;
 import com.makech.calculator.resistor.models.BandPPM;
 import com.makech.calculator.resistor.models.BandTolerance;
+import com.makech.calculator.resistor.util.Util;
 
 public class Band6Fragment extends Fragment {
 
     private int color1, color2, color3;
     private double mult, toler, ppm;
     TextView resistance_value;
+    private Util util;
 
     public Band6Fragment(){}
 
@@ -43,7 +45,7 @@ public class Band6Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_band_6, container, false);
-
+        util = new Util();
 
         //Spinner Color
         BandOfColor bandOfColor = new BandOfColor();
@@ -163,27 +165,10 @@ public class Band6Fragment extends Fragment {
     }
 
     private void calculator(){
-        double ohms;
-        String unit = "";
-        ohms = (color1 + color2 + color3) * mult;
+        double ohms = (color1 + color2 + color3) * mult;
+        String value = util.simpliflyOHM(ohms);
 
-        if(ohms < 1000) {
-            unit = "";
-        }
-        if(ohms >= 1000 && ohms < 1000000) {
-            unit = "K";
-            ohms = (ohms / 1000);
-        }
-        if(ohms >= 1000000 && ohms < 1000000000) {
-            unit = "M";
-            ohms = (ohms / 1000000);
-        }
-        if(ohms >= 1000000000) {
-            unit = "G";
-            ohms = (ohms / 1000000000);
-        }
-
-        resistance_value.setText(ohms + unit + " Ohms " +toler+" %" + ppm+" ppm");
+        resistance_value.setText(value + " Ohms " +toler+" %" + ppm+" ppm");
 
     }
 
