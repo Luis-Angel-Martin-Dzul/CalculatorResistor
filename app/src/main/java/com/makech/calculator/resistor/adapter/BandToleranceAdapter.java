@@ -14,6 +14,7 @@ import com.makech.calculator.resistor.R;
 import com.makech.calculator.resistor.models.BandMultiplier;
 import com.makech.calculator.resistor.models.BandOfColor;
 import com.makech.calculator.resistor.models.BandTolerance;
+import com.makech.calculator.resistor.util.Constants;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class BandToleranceAdapter extends ArrayAdapter<BandTolerance> {
 
         if (bandOfColor.getId() == 0) option.setTextColor(Color.parseColor("#FFFFFF"));
         option.setBackgroundColor(Color.parseColor(bandOfColor.getColor()));
-        option.setText(bandTolerance.getValue() + "±");
+        option.setText(bandTolerance.getValue() + Constants.TOLERANCES_SYMBOL);
 
         return rowView;
 

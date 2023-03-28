@@ -1,5 +1,6 @@
 package com.makech.calculator.resistor.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,12 +24,18 @@ import com.makech.calculator.resistor.models.BandPPM;
 import com.makech.calculator.resistor.models.BandTolerance;
 import com.makech.calculator.resistor.util.Util;
 
+import java.util.List;
+
 public class Band6Fragment extends Fragment {
 
-    private int color1, color2, color3;
-    private double mult, toler, ppm;
-    TextView resistance_value;
+    private int valueColor1, valueColor2, valueColor3;
+    private double valueMultiplier, valueTolerances, valuePPM;
+    private TextView resistance_value;
     private Util util;
+    private List<BandOfColor> bandOfColorList;
+    private List<BandMultiplier> bandMultiplierList;
+    private List<BandTolerance> bandToleranceList;
+    private List<BandPPM> bandPPMList;
 
     public Band6Fragment(){}
 
@@ -45,115 +53,128 @@ public class Band6Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_band_6, container, false);
+
+
+        //Vars
         util = new Util();
-
-        //Spinner Color
         BandOfColor bandOfColor = new BandOfColor();
-        BandOfColorAdapter colorOfColorAdapter = new BandOfColorAdapter(getContext(), R.layout.item_band, bandOfColor.getArrayBasicBandColor());
-
-        Spinner spinnerColor1 = view.findViewById(R.id.spinner_band_color_name_1);
-        spinnerColor1.setAdapter(colorOfColorAdapter);
-
-        Spinner spinnerColor2 = view.findViewById(R.id.spinner_band_color_name_2);
-        spinnerColor2.setAdapter(colorOfColorAdapter);
-
-        Spinner spinnerColor3 = view.findViewById(R.id.spinner_band_color_name_3);
-        spinnerColor3.setAdapter(colorOfColorAdapter);
-
-
-        //Spinner Multiplier
         BandMultiplier bandMultiplier = new BandMultiplier();
-        BandMultiplierAdapter multiplierAdapter = new BandMultiplierAdapter(getContext(), R.layout.item_band, bandMultiplier.getArrayBandMultiplier());
-
-        Spinner spinnerMult = view.findViewById(R.id.spinner_band_multiplier);
-        spinnerMult.setAdapter(multiplierAdapter);
-
-
-        //Spinner Tolerance
         BandTolerance bandTolerance = new BandTolerance();
-        BandToleranceAdapter toleranceAdapter = new BandToleranceAdapter(getContext(), R.layout.item_band, bandTolerance.getArrayBandTolerance());
-
-        Spinner spinnerToler = view.findViewById(R.id.spinner_band_tolerance);
-        spinnerToler.setAdapter(toleranceAdapter);
-
-
-        //Spinner PMM
         BandPPM bandPPM = new BandPPM();
-        BandPPMAdapter bandPPMAdapter = new BandPPMAdapter(getContext(), R.layout.item_band, bandPPM.getArrayBandPPM());
+        bandOfColorList = bandOfColor.getArrayBandColor();
+        bandMultiplierList = bandMultiplier.getArrayBandMultiplier();
+        bandToleranceList = bandTolerance.getArrayBandTolerance();
+        bandPPMList = bandPPM.getArrayBandPPM();
 
-        Spinner spinnerPPM = view.findViewById(R.id.spinner_band_ppm);
-        spinnerPPM.setAdapter(bandPPMAdapter);
+        //Call Result
+        resistance_value = view.findViewById(R.id.resistance_value);
 
-        // SELECCION
-        spinnerColor1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //Call Bands Color
+        ImageView band1 = view.findViewById(R.id.ban_res_1);
+        ImageView band2 = view.findViewById(R.id.ban_res_2);
+        ImageView band3 = view.findViewById(R.id.ban_res_3);
+        ImageView band4 = view.findViewById(R.id.ban_res_4);
+        ImageView band5 = view.findViewById(R.id.ban_res_5);
+        ImageView band6 = view.findViewById(R.id.ban_res_6);
+
+        //Call Spinners Color
+        Spinner spinnerValueColor1 = view.findViewById(R.id.spinner_band_color_name_1);
+        Spinner spinnerValueColor2 = view.findViewById(R.id.spinner_band_color_name_2);
+        Spinner spinnerValueColor3 = view.findViewById(R.id.spinner_band_color_name_3);
+        Spinner spinnerValueMultiplier = view.findViewById(R.id.spinner_band_multiplier);
+        Spinner spinnerValueTolerances = view.findViewById(R.id.spinner_band_tolerance);
+        Spinner spinnerValuePPM = view.findViewById(R.id.spinner_band_ppm);
+
+
+
+        //Spinner Adapter
+        BandOfColorAdapter colorOfColorAdapter = new BandOfColorAdapter(getContext(), R.layout.item_band, bandOfColorList);
+        BandMultiplierAdapter multiplierAdapter = new BandMultiplierAdapter(getContext(), R.layout.item_band, bandMultiplierList);
+        BandToleranceAdapter toleranceAdapter = new BandToleranceAdapter(getContext(), R.layout.item_band, bandToleranceList);
+        BandPPMAdapter bandPPMAdapter = new BandPPMAdapter(getContext(), R.layout.item_band, bandPPMList);
+
+        spinnerValueColor1.setAdapter(colorOfColorAdapter);
+        spinnerValueColor2.setAdapter(colorOfColorAdapter);
+        spinnerValueColor3.setAdapter(colorOfColorAdapter);
+        spinnerValueMultiplier.setAdapter(multiplierAdapter);
+        spinnerValueTolerances.setAdapter(toleranceAdapter);
+        spinnerValuePPM.setAdapter(bandPPMAdapter);
+
+        //Spinner selecction
+        spinnerValueColor1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 BandOfColor selectedNband = (BandOfColor) adapterView.getItemAtPosition(position);
-                color1 = selectedNband.getId() * 100;
+                valueColor1 = selectedNband.getId() * 100;
+                band1.setBackgroundColor(Color.parseColor(selectedNband.getColor()));
                 calculator();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-        spinnerColor2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerValueColor2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 BandOfColor selectedNband = (BandOfColor) adapterView.getItemAtPosition(position);
-                color2 = selectedNband.getId() * 10;
+                valueColor2 = selectedNband.getId() * 10;
+                band2.setBackgroundColor(Color.parseColor(selectedNband.getColor()));
                 calculator();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-        spinnerColor3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerValueColor3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 BandOfColor selectedNband = (BandOfColor) adapterView.getItemAtPosition(position);
-                color3 = selectedNband.getId() * 1;
+                valueColor3 = selectedNband.getId() * 1;
+                band3.setBackgroundColor(Color.parseColor(selectedNband.getColor()));
                 calculator();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-        spinnerMult.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerValueMultiplier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 BandMultiplier selMultiplier = (BandMultiplier) adapterView.getItemAtPosition(position);
-                mult = selMultiplier.getOMS();
+                band4.setBackgroundColor(Color.parseColor(bandOfColorList.get(position).getColor()));
+                valueMultiplier = selMultiplier.getOMS();
                 calculator();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-        spinnerToler.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerValueTolerances.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 BandTolerance selTolerance = (BandTolerance) adapterView.getItemAtPosition(position);
-                toler = selTolerance.getValue();
+                band5.setBackgroundColor(Color.parseColor(bandOfColorList.get(selTolerance.getFkColor()).getColor()));
+                valueTolerances = selTolerance.getValue();
                 calculator();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
-        spinnerPPM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerValuePPM.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 BandPPM selPPM = (BandPPM) adapterView.getItemAtPosition(position);
-                ppm = selPPM.getValue();
+                band6.setBackgroundColor(Color.parseColor(bandOfColorList.get(selPPM.getFkColor()).getColor()));
+                valuePPM = selPPM.getValue();
                 calculator();
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}
         });
 
-        //TextView
-        resistance_value = view.findViewById(R.id.resistance_value);
 
 
         return view;
@@ -165,10 +186,10 @@ public class Band6Fragment extends Fragment {
     }
 
     private void calculator(){
-        double ohms = (color1 + color2 + color3) * mult;
+        double ohms = (valueColor1 + valueColor2 + valueColor3) * valueMultiplier;
         String value = util.simpliflyOHM(ohms);
 
-        resistance_value.setText(value + " Ohms " +toler+" %" + ppm+" ppm");
+        resistance_value.setText(value + " Ohms " + valueTolerances +" %" + valuePPM +" ppm");
 
     }
 

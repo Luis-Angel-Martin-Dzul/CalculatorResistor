@@ -3,30 +3,29 @@ package com.makech.calculator.resistor.util;
 public class Util {
 
     public static String simpliflyOHM(double ohms){
-        String unit = "";
+        String unit = Constants.STRING_EMPTY;
 
-        if(ohms < 1000) {
-            unit = "";
+        if(ohms < Constants.THOUSAND_NUMBER) {
+            unit = Constants.STRING_EMPTY;
         }
-        if(ohms >= 1000 && ohms < 1000000) {
-            unit = "K";
-            ohms = (ohms / 1000);
+        if(ohms >= Constants.THOUSAND_NUMBER && ohms < Constants.MILLION_NUMBER) {
+            unit = Constants.THOUSAND_SYMBOL;
+            ohms = (ohms / Constants.THOUSAND_NUMBER);
         }
-        if(ohms >= 1000000 && ohms < 1000000000) {
-            unit = "M";
-            ohms = (ohms / 1000000);
+        if(ohms >= Constants.MILLION_NUMBER && ohms < Constants.BILLION_NUMBER) {
+            unit = Constants.MILLION_SYMBOL;
+            ohms = (ohms / Constants.MILLION_NUMBER);
         }
-        if(ohms >= 1000000000) {
-            unit = "G";
-            ohms = (ohms / 1000000000);
+        if(ohms >= Constants.BILLION_NUMBER) {
+            unit = Constants.BILLION_SYMBOL;
+            ohms = (ohms / Constants.BILLION_NUMBER);
         }
 
         return ohms + unit;
     }
 
     public static String simplifyMultiplier(double mult){
-        String simbol = "Ω";
-        return simpliflyOHM(mult) + simbol;
+        return simpliflyOHM(mult) + Constants.OHMS_SYMBOL;
     }
 
 }

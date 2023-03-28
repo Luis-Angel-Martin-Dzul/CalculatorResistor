@@ -4,11 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:padding="5dp"
-        android:src="@drawable/resistances"/>
+    <include layout="@layout/resistance_image_color" />
 
     <TextView
         android:id="@+id/resistance_value"
