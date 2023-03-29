@@ -1,14 +1,18 @@
 package com.makech.calculator.resistor.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.makech.calculator.resistor.R;
 import com.makech.calculator.resistor.adapter.NBandAdapter;
@@ -24,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
         //Llenar lista
         NBand nBand = new NBand();
         NBandAdapter custemAdapter = new NBandAdapter(this, R.layout.item_band, nBand.getArrayNBand());
@@ -35,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 // Se llama cuando el usuario selecciona un elemento del Spinner
                 NBand selectedNBand = (NBand) parent.getItemAtPosition(pos);
-                CallOtherFragment(selectedNBand.getId());
+                callOtherFragment(selectedNBand.getId());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -45,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void CallOtherFragment(int band){
+    private void callOtherFragment(int band){
         Fragment fragment = new Fragment();
 
         switch (band){
@@ -67,4 +78,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+
+/*            case android.R.id.opcion_info:
+                break;*/
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

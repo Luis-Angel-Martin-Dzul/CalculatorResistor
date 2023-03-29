@@ -26,7 +26,7 @@ public class BandOfColor {
     public ArrayList<BandOfColor> getArrayBasicBandColor(){
         ArrayList<BandOfColor> bandColorList = new ArrayList<BandOfColor>();
         bandColorList.add(new BandOfColor(0, "Black", "#000000"));
-        bandColorList.add(new BandOfColor(1, "Brown", "#8B4513"));
+        bandColorList.add(new BandOfColor(1, "Brown", "#964B00"));
         bandColorList.add(new BandOfColor(2, "Red", "#CC0000"));
         bandColorList.add(new BandOfColor(3, "Orange", "#D87347"));
         bandColorList.add(new BandOfColor(4, "Yellow", "#E6C951"));
@@ -42,7 +42,7 @@ public class BandOfColor {
     public ArrayList<BandOfColor> getArrayBandColor(){
         ArrayList<BandOfColor> bandColorList = new ArrayList<BandOfColor>();
         bandColorList.add(new BandOfColor(0, "Black", "#000000"));
-        bandColorList.add(new BandOfColor(1, "Brown", "#8B4513"));
+        bandColorList.add(new BandOfColor(1, "Brown", "#964B00"));
         bandColorList.add(new BandOfColor(2, "Red", "#CC0000"));
         bandColorList.add(new BandOfColor(3, "Orange", "#D87347"));
         bandColorList.add(new BandOfColor(4, "Yellow", "#E6C951"));
@@ -50,9 +50,9 @@ public class BandOfColor {
         bandColorList.add(new BandOfColor(6, "Blue", "#0F5190"));
         bandColorList.add(new BandOfColor(7, "Violet", "#6967CE"));
         bandColorList.add(new BandOfColor(8, "Grey", "#808080"));
-        bandColorList.add(new BandOfColor(9, "White", "#FFFFFF"));
-        bandColorList.add(new BandOfColor(10, "Gold", "#C08327"));
-        bandColorList.add(new BandOfColor(11, "Silver", "#BFBEBF"));
+        bandColorList.add(new BandOfColor(9, "White", "#F4F4F4"));
+        bandColorList.add(new BandOfColor(10, "Gold", "#EFB810"));
+        bandColorList.add(new BandOfColor(11, "Silver", "#C0C0C0"));
 
         return bandColorList;
     }

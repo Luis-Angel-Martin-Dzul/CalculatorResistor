@@ -21,6 +21,7 @@ import com.makech.calculator.resistor.adapter.BandToleranceAdapter;
 import com.makech.calculator.resistor.models.BandMultiplier;
 import com.makech.calculator.resistor.models.BandOfColor;
 import com.makech.calculator.resistor.models.BandTolerance;
+import com.makech.calculator.resistor.util.Constants;
 import com.makech.calculator.resistor.util.Util;
 
 import java.util.List;
@@ -80,7 +81,7 @@ public class Band5Fragment extends Fragment {
         
         
         //Load Valors
-        band6.setBackgroundColor(Color.parseColor("#C68352"));
+        band6.setBackgroundColor(Color.parseColor(Constants.COLOR_BASE));
 
 
         //Spinner Adapter
