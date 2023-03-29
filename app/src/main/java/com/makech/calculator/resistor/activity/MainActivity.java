@@ -1,5 +1,6 @@
 package com.makech.calculator.resistor.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.makech.calculator.resistor.R;
 import com.makech.calculator.resistor.adapter.NBandAdapter;
@@ -21,25 +21,24 @@ import com.makech.calculator.resistor.fragment.Band5Fragment;
 import com.makech.calculator.resistor.fragment.Band6Fragment;
 import com.makech.calculator.resistor.models.NBand;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
+    private List<NBand> nBandList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
-        //Llenar lista
         NBand nBand = new NBand();
-        NBandAdapter custemAdapter = new NBandAdapter(this, R.layout.item_band, nBand.getArrayNBand());
+        nBandList = nBand.getArrayNBand();
 
+        //Cargar datos
         Spinner spinner = findViewById(R.id.spinner_band);
+
+        NBandAdapter custemAdapter = new NBandAdapter(this, R.layout.item_band, nBandList);
+
         spinner.setAdapter(custemAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -79,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_info ,menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()){
@@ -86,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
                 super.onBackPressed();
                 break;
 
-/*            case android.R.id.opcion_info:
-                break;*/
+            case R.id.info:
+                Intent aboutActivity = new Intent(this, AboutActivity.class);
+                startActivity(aboutActivity);
+                break;
         }
 
         return super.onOptionsItemSelected(item);

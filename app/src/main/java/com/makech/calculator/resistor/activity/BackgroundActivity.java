@@ -14,6 +14,8 @@ public class BackgroundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_background);
 
+        //aqui se pondria algo para validar
+
         Intent mainAct = new Intent(this, MainActivity.class);
         startActivity(mainAct);
         finish();
